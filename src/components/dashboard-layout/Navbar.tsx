@@ -10,7 +10,12 @@ function Navbar() {
     <div className="flex h-14 w-full items-center justify-center border border-gray-600  bg-white  px-2 dark:bg-neutral-950 md:px-12  lg:px-48">
       <div className=" flex gap-6 ">
         {userId ? (
-          <UserButton afterSignOutUrl="/" />
+          <div className="flex items-center gap-2">
+            <Button variant="link" asChild size="sm" className="px-6  ">
+              <Link href="/onboarding">Onboarding</Link>
+            </Button>
+            <UserButton afterSignOutUrl="/" />
+          </div>
         ) : (
           <Button asChild size="sm" className="px-6  ">
             <Link href="/sign-in">Login</Link>
