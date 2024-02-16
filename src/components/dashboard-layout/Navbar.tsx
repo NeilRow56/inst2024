@@ -11,9 +11,6 @@ function Navbar() {
       <div className=" flex gap-6 ">
         {userId ? (
           <div className="flex items-center gap-2">
-            <Button variant="link" asChild size="sm" className="px-6  ">
-              <Link href="/onboarding">Onboarding</Link>
-            </Button>
             <UserButton afterSignOutUrl="/" />
           </div>
         ) : (

@@ -8,6 +8,7 @@ import {
   MessageCircle,
   PlusSquare,
   Search,
+  Settings,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -44,6 +45,11 @@ const links = [
     name: 'Create',
     href: '/dashboard/create',
     icon: PlusSquare,
+  },
+  {
+    name: 'Settings',
+    href: '/dashboard/settings',
+    icon: Settings,
   },
 ]
 

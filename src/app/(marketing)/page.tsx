@@ -8,7 +8,7 @@ export default function Home() {
 
   if (userId) redirect('/dashboard')
   return (
-    <section className="flex h-[90vh] items-center justify-center bg-background">
+    <section className="flex h-screen items-center justify-center bg-background">
       <div className="relative mx-auto w-full max-w-7xl items-center px-5 py-12 md:px-12 lg:px-16">
         <div className="mx-auto max-w-3xl text-center">
           <div>
