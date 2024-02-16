@@ -1,8 +1,64 @@
 import Navbar from '@/components/dashboard-layout/Navbar'
 import Sidebar from '@/components/dashboard-layout/Sidebar'
 import React, { ReactNode } from 'react'
+import { db } from '@/lib/db'
+import { auth, currentUser } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 
-function DashboardLayout({ children }: { children: ReactNode }) {
+interface getDataProps {
+  email: string
+  id: string
+  firstName: string | undefined | null
+  lastName: string | undefined | null
+}
+
+async function getData({ email, id, firstName, lastName }: getDataProps) {
+  const user = await db.user.findUnique({
+    where: {
+      id,
+      email,
+    },
+    select: {
+      id: true,
+    },
+  })
+
+  if (!user) {
+    const name = `${firstName ?? ''} ${lastName ?? ''}`
+    await db.user.create({
+      data: {
+        id: id,
+        email: email,
+        name: name,
+      },
+    })
+  }
+}
+
+export default async function DashboardLayout({
+  children,
+}: {
+  children: ReactNode
+}) {
+  const user = await currentUser()
+
+  if (!user) {
+    return redirect('/sign-in')
+  }
+
+  const { sessionClaims } = auth()
+
+  const firstName = sessionClaims?.firstName
+  const email = sessionClaims?.email
+  const userId = sessionClaims?.id
+  const lastName = sessionClaims?.lastName
+
+  await getData({
+    email: email as string,
+    firstName: firstName as string,
+    id: userId as string,
+    lastName: lastName as string,
+  })
   return (
     <div className="relative flex h-screen flex-col   md:flex-row md:overflow-hidden">
       <div className="w-20 flex-none border-gray-600 md:border-r lg:w-64">
@@ -17,5 +73,3 @@ function DashboardLayout({ children }: { children: ReactNode }) {
     </div>
   )
 }
-
-export default DashboardLayout
