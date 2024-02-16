@@ -25,6 +25,7 @@ import { useState, useRef, useEffect } from 'react'
 
 import { useTheme } from 'next-themes'
 import { SignOutButton } from '@clerk/nextjs'
+import Link from 'next/link'
 
 function MoreDropdown() {
   const [showModeToggle, setShowModeToggle] = useState(false)
@@ -75,7 +76,7 @@ function MoreDropdown() {
           <>
             <DropdownMenuItem className="menuItem">
               <Settings size={20} />
-              <p>Settings</p>
+              <Link href="/dashboard/settings">Settings</Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="menuItem">
               <Activity size={20} />

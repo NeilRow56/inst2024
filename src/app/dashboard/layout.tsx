@@ -10,9 +10,16 @@ interface getDataProps {
   id: string
   firstName: string | undefined | null
   lastName: string | undefined | null
+  imageUrl: string | undefined | null
 }
 
-async function getData({ email, id, firstName, lastName }: getDataProps) {
+async function getData({
+  email,
+  id,
+  firstName,
+  lastName,
+  imageUrl,
+}: getDataProps) {
   const user = await db.user.findUnique({
     where: {
       id,
@@ -30,6 +37,7 @@ async function getData({ email, id, firstName, lastName }: getDataProps) {
         id: id,
         email: email,
         name: name,
+        imageUrl: imageUrl,
       },
     })
   }
@@ -52,12 +60,14 @@ export default async function DashboardLayout({
   const email = sessionClaims?.email
   const userId = sessionClaims?.id
   const lastName = sessionClaims?.lastName
+  const imageUrl = sessionClaims?.imageUrl
 
   await getData({
     email: email as string,
     firstName: firstName as string,
     id: userId as string,
     lastName: lastName as string,
+    imageUrl: imageUrl as string,
   })
   return (
     <div className="relative flex h-screen flex-col   md:flex-row md:overflow-hidden">

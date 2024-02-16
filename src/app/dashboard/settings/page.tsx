@@ -36,6 +36,7 @@ async function getData(email: string) {
       name: true,
       email: true,
       colorScheme: true,
+      imageUrl: true,
     },
   })
 
@@ -44,6 +45,7 @@ async function getData(email: string) {
 
 const SettingsPage = async () => {
   const { sessionClaims } = auth()
+
   const email = sessionClaims?.email
 
   const data = await getData(email as string)
@@ -53,6 +55,7 @@ const SettingsPage = async () => {
 
     const name = formData.get('name') as string
     const colorScheme = formData.get('color') as string
+    const imageUrl = formData.get('imageUrl') as string
 
     await db.user.update({
       where: {
@@ -61,6 +64,7 @@ const SettingsPage = async () => {
       data: {
         name: name ?? undefined,
         colorScheme: colorScheme ?? undefined,
+        imageUrl: imageUrl ?? undefined,
       },
     })
 
@@ -72,7 +76,9 @@ const SettingsPage = async () => {
       <div className="flex items-center justify-between px-2">
         <div className="grid gap-1">
           <h1 className="text-3xl text-primary md:text-4xl">Settings</h1>
-          <p className="text-lg text-muted-foreground">Your Profile Settings</p>
+          <span className="text-lg text-muted-foreground">
+            Your Profile Settings
+          </span>
         </div>
       </div>
       <Card>
@@ -109,6 +115,18 @@ const SettingsPage = async () => {
                   placeholder="Your Email"
                   disabled
                   defaultValue={data?.email as string}
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-lg font-semibold text-primary">
+                  Your Image url
+                </Label>
+                <Input
+                  name="imageUrl"
+                  type="text"
+                  id="imageUrl"
+                  placeholder="Your Image url"
+                  defaultValue={data?.imageUrl as string}
                 />
               </div>
 
