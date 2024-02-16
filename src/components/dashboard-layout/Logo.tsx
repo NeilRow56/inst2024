@@ -14,11 +14,13 @@ function Logo() {
       })}
     >
       <SwitchCamera className="h-6 w-6 shrink-0 text-primary lg:hidden" />
-      <p
+      {/* <p
         className={` hidden bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent lg:block`}
       >
         INST24
-      </p>
+      </p> */}
+      <h1 className="text-3xl font-bold">Inst </h1>
+      <span className="text-3xl text-primary">2024</span>
     </Link>
   )
 }
