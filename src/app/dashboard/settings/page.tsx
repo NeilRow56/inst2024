@@ -86,16 +86,14 @@ const SettingsPage = async () => {
           <CardHeader>
             <CardTitle>General Data</CardTitle>
             <CardDescription>
-              Please provide general information about yourself. Please dont
+              Please provide general information about yourself. Please do not
               forget to save
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
               <div className="space-y-1">
-                <Label className="text-lg font-semibold text-primary">
-                  Your Name
-                </Label>
+                <Label className="text-lg text-primary">Your Name</Label>
                 <Input
                   name="name"
                   type="text"
@@ -105,9 +103,7 @@ const SettingsPage = async () => {
                 />
               </div>
               <div className="space-y-1">
-                <Label className="text-lg font-semibold text-primary">
-                  Your Email
-                </Label>
+                <Label className="text-lg text-primary">Your Email</Label>
                 <Input
                   name="email"
                   type="email"
@@ -118,9 +114,7 @@ const SettingsPage = async () => {
                 />
               </div>
               <div className="space-y-1">
-                <Label className="text-lg font-semibold text-primary">
-                  Your Image url
-                </Label>
+                <Label className="text-lg text-primary">Your Image url</Label>
                 <Input
                   name="imageUrl"
                   type="text"
@@ -131,9 +125,7 @@ const SettingsPage = async () => {
               </div>
 
               <div className="space-y-1">
-                <Label className="text-lg font-semibold text-primary">
-                  Color Scheme
-                </Label>
+                <Label className="text-lg  text-primary">Color Scheme</Label>
                 <Select name="color" defaultValue={data?.colorScheme}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a color" />

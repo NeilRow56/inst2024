@@ -10,11 +10,11 @@ export function SubmitButton() {
   return (
     <>
       {pending ? (
-        <Button disabled className="w-fit">
+        <Button disabled className="w-fit bg-orange-800">
           <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please Wait
         </Button>
       ) : (
-        <Button className="w-fit" type="submit">
+        <Button className="w-fit bg-orange-800" type="submit">
           Save Now
         </Button>
       )}
