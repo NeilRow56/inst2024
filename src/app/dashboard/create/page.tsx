@@ -31,7 +31,7 @@ import { useEdgeStore } from '@/lib/edgestore'
 
 import { Loader2, XCircle } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
-import { CreatePostValues, createPostSchema } from '@/actions/posts/schemas'
+import { CreatePostValues, CreatePostSchema } from '@/actions/posts/schemas'
 
 function CreatePage() {
   const pathname = usePathname()
@@ -47,7 +47,7 @@ function CreatePage() {
   const mount = useMount()
 
   const form = useForm<CreatePostValues>({
-    resolver: zodResolver(createPostSchema),
+    resolver: zodResolver(CreatePostSchema),
     defaultValues: {
       caption: '',
       fileUrl: undefined,
@@ -92,7 +92,7 @@ function CreatePage() {
   if (!mount) return null
 
   async function onSubmit(values: CreatePostValues) {
-    // alert(JSON.stringify(values, null, 2))
+    alert(JSON.stringify(values, null, 2))
     console.log(values)
   }
 
@@ -122,6 +122,7 @@ function CreatePage() {
                               <Image
                                 fill
                                 src={fileUrl}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 alt="Hotel Image"
                                 className="object-contain"
                               />
@@ -169,13 +170,12 @@ function CreatePage() {
                                             await edgestore.publicFiles.upload({
                                               file,
                                               onProgressChange: (progress) => {
-                                                console.log(progress)
                                                 setProgress(progress)
                                               },
                                             })
                                           // you can run some server action or api here
                                           // to add the necessary data to your database
-                                          console.log(res)
+                                          // console.log(res)
                                           setFileUrl(res?.url)
                                           toast({
                                             variant: 'success',
@@ -199,6 +199,30 @@ function CreatePage() {
                   </FormItem>
                 )}
               />
+
+              {!!fileUrl && (
+                <FormField
+                  control={form.control}
+                  name="caption"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="caption">Caption</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="caption"
+                          id="caption"
+                          placeholder="Write a caption..."
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                Create Post
+              </Button>
             </form>
           </Form>
         </DialogContent>

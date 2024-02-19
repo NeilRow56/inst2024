@@ -8,7 +8,7 @@ async function Post() {
   const { userId } = auth()
   const user = await currentUser()
   //   const username = post.user.username;
-  console.log(user)
+  // console.log(user)
   if (!userId) return null
 
   return (
@@ -42,6 +42,8 @@ async function Post() {
           alt="Post Image"
           width={90}
           height={160}
+          priority
+          style={{ width: '10%', height: 'auto' }}
           className="object-cover sm:rounded-md"
         />
       </Card>
