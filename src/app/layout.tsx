@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider, auth } from '@clerk/nextjs'
+import { EdgeStoreProvider } from '@/lib/edgestore'
+import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 import { db } from '@/lib/db'
@@ -49,7 +51,8 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <EdgeStoreProvider>{children}</EdgeStoreProvider>
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

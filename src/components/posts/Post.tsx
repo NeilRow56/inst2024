@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card } from '../ui/card'
 import { auth, currentUser } from '@clerk/nextjs'
+import { AspectRatio } from '../ui/aspect-ratio'
 
 async function Post() {
   const { userId } = auth()
@@ -39,8 +40,8 @@ async function Post() {
         <Image
           src="/neil.jpg"
           alt="Post Image"
-          width={100}
-          height={200}
+          width={90}
+          height={160}
           className="object-cover sm:rounded-md"
         />
       </Card>
